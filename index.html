@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherCast Pro - Smart Weather Forecasting</title>
+    <meta name="description" content="Advanced weather forecasting with real-time data and predictions">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="theme-color" content="#4361ee">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                    Aero_vision Forecast
+                </h1>
+                
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="city-input" placeholder="Search city..." autocomplete="off">
+                        <button id="search-btn" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button id="location-btn" class="btn btn-secondary" title="Use my location">
+                            <i class="fas fa-location-arrow"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- NEW: Features & Auth Buttons -->
+                <div class="header-buttons">
+                    <button id="features-btn" class="btn btn-ghost">
+                        <i class="fas fa-cube"></i> Features
+                    </button>
+                    <button id="auth-btn" class="btn btn-primary">
+                        <i class="fas fa-user"></i> Login
+                    </button>
+                    <div class="theme-toggle">
+                        <button id="theme-btn" class="btn btn-ghost">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Weather Section -->
+            <section class="current-weather-section" id="current-weather">
+                <div class="weather-card glassmorphism">
+                    <div class="weather-header">
+                        <div class="location-info">
+                            <h2 id="city-name" class="city-name">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="city-text">Search for a city</span>
+                            </h2>
+                            <p id="current-date" class="current-date">--</p>
+                            <p id="weather-description" class="weather-description">--</p>
+                        </div>
+                        <div class="temperature-display">
+                            <div class="temp-main">
+                                <span id="current-temp" class="temperature">--</span>
+                                <span class="unit">°C</span>
+                            </div>
+                            <div class="feels-like">
+                                Feels like <span id="feels-like">--</span>°C
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weather-main">
+                        <div class="weather-icon-container">
+                            <i class="fas fa-sun weather-icon" id="weather-icon"></i>
+                        </div>
+                        <div class="weather-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-wind"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="wind-speed">--</span>
+                                    <span class="stat-label">Wind Speed</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-tint"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="humidity">--</span>
+                                    <span class="stat-label">Humidity</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-thermometer-half"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="pressure">--</span>
+                                    <span class="stat-label">Pressure</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Forecast Section -->
+            <section class="forecast-section" id="forecast">
+                <h3 class="section-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    5-Day Forecast
+                </h3>
+                <div class="forecast-container" id="forecast-container">
+                    <div class="forecast-placeholder">
+                        <i class="fas fa-cloud-sun"></i>
+                        <p>Search for a city to see forecast</p>
+                    </div>
+                </div>
+            </section>
+
+          <!-- Additional Info Section -->
+<section class="additional-info-section">
+    <h3 class="section-title">
+        <i class="fas fa-info-circle"></i>
+        Weather Details
+    </h3>
+    <div class="info-grid">
+        <div class="info-card glassmorphism">
+            <div class="info-icon uv-index">
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="info-content">
+                <h4><i class="fas fa-sun icon-small"></i> UV Index</h4>
+                <p class="info-value" id="uv-index">--</p>
+                <p class="info-label" id="uv-level">--</p>
+            </div>
+        </div>
+
+        <div class="info-card glassmorphism">
+            <div class="info-icon visibility">
+                <i class="fas fa-eye"></i>
+            </div>
+            <div class="info-content">
+                <h4><i class="fas fa-eye icon-small"></i> Visibility</h4>
+                <p class="info-value" id="visibility">-- km</p>
+                <p class="info-label">Distance</p>
+            </div>
+        </div>
+
+        <div class="info-card glassmorphism">
+            <div class="info-icon sunrise">
+                <i class="fas fa-sunrise"></i>
+            </div>
+            <div class="info-content">
+                <h4><i class="fas fa-sunrise icon-small"></i> Sunrise</h4>
+                <p class="info-value" id="sunrise">--:--</p>
+                <p class="info-label">Morning</p>
+            </div>
+        </div>
+
+        <div class="info-card glassmorphism">
+            <div class="info-icon sunset">
+                <i class="fas fa-sunset"></i>
+            </div>
+            <div class="info-content">
+                <h4><i class="fas fa-sunset icon-small"></i> Sunset</h4>
+                <p class="info-value" id="sunset">--:--</p>
+                <p class="info-label">Evening</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!-- Air Quality Section -->
+            <section class="air-quality-section" id="air-quality">
+                <h3 class="section-title">
+                    <i class="fas fa-wind"></i>
+                    Air Quality
+                </h3>
+                <div class="air-quality-card glassmorphism">
+                    <div class="aqi-main">
+                        <div class="aqi-value" id="aqi-value">--</div>
+                        <div class="aqi-level" id="aqi-level">--</div>
+                    </div>
+                    <div class="aqi-details">
+                        <div class="pollutant">
+                            <span class="pollutant-name">PM2.5</span>
+                            <span class="pollutant-value" id="pm25">--</span>
+                        </div>
+                        <div class="pollutant">
+                            <span class="pollutant-name">PM10</span>
+                            <span class="pollutant-value" id="pm10">--</span>
+                        </div>
+                        <div class="pollutant">
+                            <span class="pollutant-name">O₃</span>
+                            <span class="pollutant-value" id="o3">--</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-links">
+            <button id="refresh-btn" class="btn btn-ghost">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </div>
+    
+    <!-- TECH-FOCUSED FOOTER ADDED BELOW -->
+    <div class="tech-footer">
+        <div class="tech-footer-content">
+            <div class="tech-info">
+                <h5><i class="fas fa-satellite"></i> Data Sources & APIs</h5>
+                <div class="api-badges">
+                    <div class="api-badge">
+                        <i class="fas fa-cloud-sun"></i>
+                        <span>OpenWeatherMap</span>
+                    </div>
+                    <div class="api-badge">
+                        <i class="fas fa-satellite-dish"></i>
+                        <span>NASA Earth Data</span>
+                    </div>
+                    <div class="api-badge">
+                        <i class="fas fa-wind"></i>
+                        <span>Air Quality API</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-stack">
+                <h5><i class="fas fa-code"></i> Built With</h5>
+                <div class="stack-items">
+                    <span>Flask</span>
+                    <span>JavaScript</span>
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>NASA APIs</span>
+                </div>
+            </div>
+            
+            <div class="developer-info">
+                <h5><i class="fas fa-user-cog"></i> Developer</h5>
+                <p>For support or collaboration:</p>
+                <a href="mailto:support@aerovision.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Contact Us
+                </a>
+                <p><strong>Developed by TECHNO_GPNs</strong></p>
+            </div>
+        </div>
+        
+        <div class="tech-footer-bottom">
+            <div class="version-info">
+                <span>v2.1.0 | NASA Integration Active</span>
+            </div>
+            <div class="legal-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">API Status</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner-content">
+            <div class="spinner"></div>
+            <p>Loading weather data...</p>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal" id="error-modal">
+        <div class="modal-content glassmorphism">
+            <div class="modal-header">
+                <h3>Error</h3>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="error-message">An error occurred while fetching weather data.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="modal-retry">Retry</button>
+            </div>
+        </div>
+    </div>
+
+   <!-- NEW: Features Modal -->
+<div class="features-modal" id="features-modal">
+    <div class="modal-content glassmorphism" style="max-width: 800px;">
+        <div class="modal-header">
+            <h3>Aero_vision Features</h3>
+            <button class="modal-close" onclick="featureManager.hideFeaturesModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="features-grid">
+                <div class="feature-card" onclick="featureManager.showAQICalculator()">
+                    <i class="fas fa-calculator"></i>
+                    <h4>AQI Calculator</h4>
+                    <p>Calculate Air Quality Index from pollutant data</p>
+                </div>
+                <div class="feature-card" onclick="featureManager.showPollutionMap()">
+    <i class="fas fa-satellite"></i>
+    <h4>NASA Pollution Map</h4>
+    <p>Real-time satellite air quality data</p>
+</div>
+                <div class="feature-card" onclick="featureManager.showChatBot()">
+                    <i class="fas fa-robot"></i>
+                    <h4>Weather Assistant</h4>
+                    <p>AQI based weather Q&A</p>
+                </div>
+                <div class="feature-card" onclick="featureManager.showWeatherCards()">
+                    <i class="fas fa-layer-group"></i>
+                    <h4>Health Guidlines</h4>
+                    <p>Detailed weather Guidlines based on AQI</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- NEW: Auth Modal -->
+    <div class="auth-modal" id="auth-modal">
+        <div class="modal-content glassmorphism" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3>Account</h3>
+                <button class="modal-close" onclick="featureManager.hideAuthModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                </div>
+                
+                <div class="auth-form active" id="login-form">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="login-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="featureManager.handleLogin()">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+                
+                <div class="auth-form" id="signup-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="signup-name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="signup-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="signup-password" placeholder="Create a password">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="featureManager.handleSignup()">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- AQI Calculator Modal -->
+<div class="features-modal" id="aqi-calculator-modal">
+    <div class="modal-content glassmorphism" style="max-width: 500px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-calculator"></i> AQI Calculator</h3>
+            <button class="modal-close" onclick="hideAQICalculator()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="aqi-inputs">
+                <div class="form-group">
+                    <label><i class="fas fa-wind"></i> PM2.5 (μg/m³)</label>
+                    <input type="number" id="pm25-input" placeholder="Enter PM2.5 value" min="0" max="500" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-wind"></i> PM10 (μg/m³)</label>
+                    <input type="number" id="pm10-input" placeholder="Enter PM10 value" min="0" max="600" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-cloud"></i> O₃ (ppb)</label>
+                    <input type="number" id="o3-input" placeholder="Enter Ozone value" min="0" max="500" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-smog"></i> NO₂ (ppb)</label>
+                    <input type="number" id="no2-input" placeholder="Enter NO₂ value" min="0" max="400" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-industry"></i> SO₂ (ppb)</label>
+                    <input type="number" id="so2-input" placeholder="Enter SO₂ value" min="0" max="300" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-gas-pump"></i> CO (ppm)</label>
+                    <input type="number" id="co-input" placeholder="Enter CO value" min="0" max="50" step="0.1">
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%; margin: 1rem 0;" onclick="calculateAQI()">
+                <i class="fas fa-calculator"></i> Calculate AQI
+            </button>
+            
+            <div class="aqi-result" id="aqi-result" style="display: none;">
+                <div class="aqi-display">
+                    <div class="aqi-value-large" id="aqi-calculated-value">--</div>
+                    <div class="aqi-level-large" id="aqi-calculated-level">--</div>
+                </div>
+                <div class="aqi-breakdown">
+                    <h4><i class="fas fa-list"></i> Breakdown</h4>
+                    <div class="pollutant-breakdown" id="pollutant-breakdown">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="health-recommendation" id="health-recommendation">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Enhanced NASA Pollution Map Modal -->
+<div class="features-modal" id="pollution-map-modal">
+    <div class="modal-content glassmorphism" style="max-width: 1000px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-satellite"></i> NASA Pollution Map</h3>
+            <button class="modal-close" onclick="hidePollutionMap()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- NASA Controls -->
+            <div class="nasa-controls">
+                <div class="control-group">
+                    <label><i class="fas fa-layer-group"></i> Data Layer:</label>
+                    <select id="nasa-layer">
+                        <option value="aerosol">Aerosol Optical Depth</option>
+                        <option value="pm25">PM2.5 Estimate</option>
+                        <option value="pm10">PM10 Estimate</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label><i class="fas fa-calendar"></i> Date:</label>
+                    <input type="date" id="nasa-date" value="<?php echo date('Y-m-d'); ?>">
+                </div>
+                <button class="btn btn-primary" onclick="loadNASAData()">
+                    <i class="fas fa-satellite"></i> Get NASA Data
+                </button>
+            </div>
+
+            <!-- NASA Map Visualization -->
+            <div class="nasa-map-container">
+                <div class="nasa-map" id="nasa-map">
+                    <div class="map-overlay">
+                        <div class="nasa-loading" id="nasa-loading">
+                            <i class="fas fa-satellite fa-spin"></i>
+                            <p>Connecting to NASA Satellite...</p>
+                            <div class="loading-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="nasa-legend">
+                            <h5><i class="fas fa-palette"></i> Aerosol Concentration</h5>
+                            <div class="legend-scale">
+                                <div class="legend-item" style="background: #00ff00;">Low (0-0.3)</div>
+                                <div class="legend-item" style="background: #ffff00;">Moderate (0.3-0.6)</div>
+                                <div class="legend-item" style="background: #ff9900;">High (0.6-0.9)</div>
+                                <div class="legend-item" style="background: #ff0000;">Very High (0.9+)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time NASA Data -->
+            <div class="nasa-live-data" id="nasa-live-data">
+                <h4><i class="fas fa-chart-line"></i> Real-time Satellite Data</h4>
+                <div class="data-grid">
+                    <div class="data-item">
+                        <span class="data-label">Aerosol Optical Depth</span>
+                        <span class="data-value" id="aod-value">--</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Estimated AQI</span>
+                        <span class="data-value" id="nasa-aqi">--</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">PM2.5 Estimate</span>
+                        <span class="data-value" id="nasa-pm25">-- μg/m³</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Data Source</span>
+                        <span class="data-value">NASA MODIS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- City Selection -->
+            <div class="nasa-cities">
+                <h4><i class="fas fa-city"></i> Select City for NASA Analysis</h4>
+                <div class="cities-grid" id="nasa-cities-grid">
+                    <!-- Cities will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- NASA Attribution -->
+            <div class="nasa-attribution">
+                <p>
+                    <i class="fas fa-satellite"></i>
+                    <strong>Data Source:</strong> NASA Earth Observations • MODIS Satellite • 
+                    <a href="https://earthdata.nasa.gov" target="_blank">earthdata.nasa.gov</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Weather Assistant Modal -->
+<div class="features-modal" id="weather-assistant-modal">
+    <div class="modal-content glassmorphism" style="max-width: 600px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-robot"></i> Weather Assistant</h3>
+            <button class="modal-close" onclick="hideWeatherAssistant()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>Hello! I'm your Weather Assistant. Ask me about air quality, health recommendations, or weather safety tips based on AQI levels.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="user-input" placeholder="Ask about air quality or health tips...">
+                    <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Health Guidelines Modal -->
+<div class="features-modal" id="health-guidelines-modal">
+    <div class="modal-content glassmorphism" style="max-width: 800px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-heartbeat"></i> Health Guidelines</h3>
+            <button class="modal-close" onclick="hideHealthGuidelines()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="guidelines-container">
+                <div class="aqi-level-selector">
+                    <div class="level-btn active" data-level="all">All Levels</div>
+                    <div class="level-btn" data-level="good">Good (0-50)</div>
+                    <div class="level-btn" data-level="moderate">Moderate (51-100)</div>
+                    <div class="level-btn" data-level="unhealthy-sensitive">Unhealthy for Sensitive (101-150)</div>
+                    <div class="level-btn" data-level="unhealthy">Unhealthy (151-200)</div>
+                    <div class="level-btn" data-level="very-unhealthy">Very Unhealthy (201-300)</div>
+                    <div class="level-btn" data-level="hazardous">Hazardous (301-500)</div>
+                </div>
+                
+                <div class="guidelines-content" id="guidelines-content">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                
+                <div class="statistics-section">
+                    <h4><i class="fas fa-chart-bar"></i> Health Impact Statistics</h4>
+                    <div class="stats-grid" id="stats-grid">
+                        <!-- Statistics will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>

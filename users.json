@@ -1,0 +1,42 @@
+{
+  "kazmasheikh666@gmail.com": {
+    "name": "kazma sheikh",
+    "password_hash": "240aedb279788f6ba01aea10ba56f2729a5bffb5423c7b8e2e103832f9550ba8",
+    "created_at": "2025-10-03T23:45:44.815162",
+    "saved_locations": [],
+    "preferences": {
+      "temperature_unit": "celsius",
+      "theme": "light"
+    }
+  },
+  "himanshithakur7499@gmail.com": {
+    "name": "himanshi thakur",
+    "password_hash": "d7c9619e4ea3b37717fee26adf9e2c96983099c5b008e6c795361ac9bd50c667",
+    "created_at": "2025-10-04T13:38:05.074328",
+    "saved_locations": [],
+    "preferences": {
+      "temperature_unit": "celsius",
+      "theme": "light"
+    }
+  },
+  "reshmasheikh@gmail.com": {
+    "name": "Reshma sheikh",
+    "password_hash": "09f8eb5e9eb0f09b6bfaa814d18677c8f918bda3755c1fbb263bf2443e04f72a",
+    "created_at": "2025-10-04T23:50:55.468313",
+    "saved_locations": [],
+    "preferences": {
+      "temperature_unit": "celsius",
+      "theme": "light"
+    }
+  },
+  "salimsheikh@gmail.com": {
+    "name": "Salim sheikh",
+    "password_hash": "5643ec7f82534deefa65edb276841b26d77db1d48131674b706cbde103a88cc6",
+    "created_at": "2025-10-05T14:38:49.786657",
+    "saved_locations": [],
+    "preferences": {
+      "temperature_unit": "celsius",
+      "theme": "light"
+    }
+  }
+}
