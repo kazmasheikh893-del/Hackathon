@@ -101,8 +101,7 @@ These resources support the project's focus on Earth observation, environmental 
 
 ## 🚀 Project Links
 
-- **GitHub Repository:** [Add your repository URL here]
-- **Project Demonstration / Presentation:** [Add your Canva presentation link here]
+- **Project Demonstration / Presentation:** [[ Canva presentation link ](https://www.canva.com/design/DAG0MIU0ID4/AoRwjEMPkihQDkv708cZAw/edit?utm_content=DAG0MIU0ID4&amp;utm_campaign=designshare&amp;utm_medium=link2&amp;utm_source=sharebutton)]
 
 ---
 
